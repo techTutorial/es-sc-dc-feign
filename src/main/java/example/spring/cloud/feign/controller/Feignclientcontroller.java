@@ -1,4 +1,4 @@
-package com.springcloud.feign.controller;
+package example.spring.cloud.feign.controller;
 
 import static java.lang.System.out;
 

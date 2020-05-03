@@ -1,4 +1,4 @@
-package com.springcloud.feign;
+package example.spring.cloud.feign;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,10 +10,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableCircuitBreaker
-public class Springfeignclient {
+public class DiscoveryClientFeignApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Springfeignclient.class, args);
+		SpringApplication.run(DiscoveryClientFeignApp.class, args);
 	}
 
 }

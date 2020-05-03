@@ -1,5 +1,7 @@
 package com.springcloud.feign.controller;
 
+import static java.lang.System.out;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
-// Application url - localhost:9191/feign/getGreetings/en
-
+// http://localhost:9191/feign/greet2/en
 @RestController
 @RequestMapping(value= "/feign")
 public class Feignclientcontroller {
@@ -20,29 +21,21 @@ public class Feignclientcontroller {
 	@Autowired
 	Greetingsclient greetingsfeignclient;
 
-	/**
-	 * Method to fetch the greetings information from the different microservices via feign client (i.e. declarative approach).
-	 * @param langCode
-	 * @return
-	 */
-	@GetMapping(value="/getGreetings/{localeId}", produces= MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand(fallbackMethod= "defaultResponse")
-	public ResponseEntity<String> getGreetingsAndUserInfoViaFeign(@PathVariable(name= "localeId") String langCode) {
-		System.out.println("Using the feign client controller to fetch the greetings information for locale= " + langCode);
-
-		// Fetching the greetings salutation for the given locale. 
-		// Data is fetched from thr greetings microservice hosted on port no. - 8181
+	// it provides one more level of request mapping
+	@GetMapping(value="/greet2/{localeId}", produces= MediaType.APPLICATION_JSON_VALUE)
+	@HystrixCommand(fallbackMethod= "defaultGreetingsResponse")
+	public ResponseEntity<String> getGreetings(@PathVariable(name= "localeId") String langCode) {
+		out.println("Declarative approach of Feign Client: Data is fetched from another micro-service hosted on port no 8181");
 		String greetMsg = greetingsfeignclient.getGreetings(langCode);
-		System.out.println("Welcome msg for locale= " + langCode + ", is= " + greetMsg);
-
-		// Sending the response
+		out.println("Locale Language: " + langCode + ", Greeting Message: " + greetMsg);
 		return new ResponseEntity<String>(greetMsg, HttpStatus.OK);
 	}
 
-	// When we define a fallback-method, the fallback-method must match the same parameters of the method where you define the Hystrix Command using the hystrix-command annotation.
-	public ResponseEntity<String> defaultResponse(String err) {
-		System.out.println("You are seeing this fallback response because the underlying microservice is down.");
-		err = "Fallback error as the microservice is down.";
+	// When we define a fallback-method, the fallback-method must match the same parameters of the method 
+	// where you define the Hystrix Command using the hystrix-command annotation.
+	public ResponseEntity<String> defaultGreetingsResponse(String err) {
+		err = "Fallback error response as underlying microservice is down.";
 		return new ResponseEntity<String>(err, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
 }

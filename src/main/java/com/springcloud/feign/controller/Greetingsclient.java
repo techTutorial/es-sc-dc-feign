@@ -4,14 +4,13 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name= "greetings")
+// same as application name of dependent microservice
+@FeignClient(name= "discovery-client")
 public interface Greetingsclient {
 
-	/**
-	 * Interface method to get the greetings information from a different microservice.
-	 * @param langCode
-	 * @return
-	 */
-	@GetMapping(value= "/greet/welcome/{localeId}")
+	// request mapping URL is same as mapping URL of dependent microservice
+	@GetMapping(value= "/greet/msg/{localeId}")
+	// Interface method has dependency on another microservice
 	public String getGreetings(@PathVariable(name= "localeId") String langCode);
+
 }

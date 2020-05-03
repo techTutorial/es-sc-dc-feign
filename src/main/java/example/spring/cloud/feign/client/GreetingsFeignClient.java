@@ -1,4 +1,4 @@
-package example.spring.cloud.feign.controller;
+package example.spring.cloud.feign.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 // same as application name of dependent microservice
 @FeignClient(name= "discovery-client")
-public interface Greetingsclient {
+public interface GreetingsFeignClient {
 
 	// request mapping URL is same as mapping URL of dependent microservice
 	@GetMapping(value= "/greet/msg/{localeId}")

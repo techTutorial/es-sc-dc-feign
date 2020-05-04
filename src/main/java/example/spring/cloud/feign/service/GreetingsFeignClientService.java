@@ -1,4 +1,4 @@
-package example.spring.cloud.feign.resource;
+package example.spring.cloud.feign.service;
 
 import static java.lang.System.out;
 
@@ -10,7 +10,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import example.spring.cloud.feign.client.GreetingsFeignClient;
 
 @Service
-public class GreetingsFeignClientResource {
+public class GreetingsFeignClientService {
 
 	@Autowired
 	GreetingsFeignClient gfc;

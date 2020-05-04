@@ -1,4 +1,4 @@
-package example.spring.cloud.feign.resource;
+package example.spring.cloud.feign.service;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import example.spring.cloud.feign.client.GreetingsFeignClient3;
+import example.spring.cloud.feign.service.GreetingsFeignClientService3;
 
 // http://localhost:9191/feign3/greet3/en
 @RestController
@@ -17,11 +17,11 @@ import example.spring.cloud.feign.client.GreetingsFeignClient3;
 public class GreetingsFeignClientController3 {
 
 	@Autowired
-	GreetingsFeignClient3 gfcr3;	
+	GreetingsFeignClientService3 gfcs3;	
 	
 	@GetMapping(value="/greet3/{localeId}", produces= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getGreetings3(@PathVariable(name= "localeId") String langCode) {
-		String greetMsg = gfcr3.getGreetings3(langCode);
+		String greetMsg = gfcs3.getGreetings3(langCode);
 		if(greetMsg.contains("Fallback")) {
 			return new ResponseEntity<String>(greetMsg, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

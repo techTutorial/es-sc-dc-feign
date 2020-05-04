@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import example.spring.cloud.feign.resource.GreetingsFeignClientService3;
+import example.spring.cloud.feign.service.GreetingsFeignClientService3;
 
 @FeignClient(name="discovery-client",
 	//url="http://localhost:8181",

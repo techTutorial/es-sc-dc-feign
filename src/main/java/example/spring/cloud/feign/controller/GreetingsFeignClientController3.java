@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import example.spring.cloud.feign.service.GreetingsFeignClientService3;
+//import example.spring.cloud.feign.service.GreetingsFeignClientService3;
 
 // http://localhost:9191/feign3/greet3/en
-@RestController
+/*@RestController
 @RequestMapping(value= "/feign3")
 public class GreetingsFeignClientController3 {
 
@@ -29,3 +29,4 @@ public class GreetingsFeignClientController3 {
 	}
 	
 }
+*/

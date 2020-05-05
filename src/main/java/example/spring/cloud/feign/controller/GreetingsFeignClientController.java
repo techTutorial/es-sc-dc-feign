@@ -29,9 +29,16 @@ public class GreetingsFeignClientController {
 			return new ResponseEntity<String>(greetMsg, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		model.addAttribute("greeting", greetMsg);
-		
 		return new ResponseEntity<String>(greetMsg, HttpStatus.OK);
+	}
+
+
+	// http://localhost:9191/feign/thymeleaf
+	// unable to display content via view > not working > Pending
+	@GetMapping(value="/thymeleaf")
+	public String getGreetings(Model model) {		
+		model.addAttribute("message", "Thymeleaf Integration");
+		return "greeting-view.html";
 	}
 	
 }

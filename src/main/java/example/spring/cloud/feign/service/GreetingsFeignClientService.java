@@ -15,7 +15,7 @@ public class GreetingsFeignClientService {
 	@Autowired
 	GreetingsFeignClient gfc;
 
-	@HystrixCommand(fallbackMethod= "defaultGreetingsResponse")
+	@HystrixCommand(fallbackMethod= "defaultGreetingsFallback")
 	public String getGreetings(String langCode) {
 		String greetMsg = gfc.getGreetings(langCode);
 		out.println("Declarative approach of Feign Client: Data is fetched from another micro-service hosted on port no 8181");
@@ -25,7 +25,7 @@ public class GreetingsFeignClientService {
 
 	// When we define a fallback-method, the fallback-method must match the same parameters of the method 
 	// where you define the Hystrix Command using the hystrix-command annotation.
-	public String defaultGreetingsResponse(String langCode) {
+	public String defaultGreetingsFallback(String langCode) {
 		return langCode + ": Fallback error response as underlying microservice is down.";
 	}
 	
